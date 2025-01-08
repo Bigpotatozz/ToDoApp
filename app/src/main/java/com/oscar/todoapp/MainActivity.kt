@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -28,13 +29,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.oscar.todoapp.completedTasksScreen.ui.CompletedTasksScreen
+import com.oscar.todoapp.initialScreen.InitialScreenViewModel
 import com.oscar.todoapp.initialScreen.data.models.Task
 import com.oscar.todoapp.initialScreen.ui.InitialScreen
 import com.oscar.todoapp.models.Routes
 import com.oscar.todoapp.ui.theme.ToDoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val initialScreenViewModel: InitialScreenViewModel by viewModels();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,30 +52,15 @@ class MainActivity : ComponentActivity() {
                     bottomBar = { BottomNavigationBar(navController = navigation) }) { innerPadding ->
 
                     val tasks = listOf(
-                        Task("Hacer la tarea", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea2", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea3", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea4", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea5", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea6", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea7", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea8", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea9", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea10", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea11", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea12", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea13", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea14", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea15", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea16", LocalDate.of(2025, 1, 6), false),
-                        Task("Hacer la tarea17", LocalDate.of(2025, 1, 6), false),
+                        Task(1,"Hacer la tarea", "no se que poner", "10/11/22", false),
+
                     );
 
 
                     NavHost(navController = navigation, startDestination = Routes.InitialScreen.route){
                         composable(Routes.InitialScreen.route){ InitialScreen(modifier = Modifier.padding(innerPadding),
                             tasks = tasks,
-                            navController = navigation) }
+                            navController = navigation, initialScreenViewModel = initialScreenViewModel) }
 
                         composable(Routes.CompletedTasksScreen.route){
                             CompletedTasksScreen(modifier = Modifier.padding(innerPadding), tasks)
