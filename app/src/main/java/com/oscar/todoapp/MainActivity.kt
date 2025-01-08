@@ -51,6 +51,9 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     bottomBar = { BottomNavigationBar(navController = navigation) }) { innerPadding ->
 
+                    val taskTest = initialScreenViewModel.getTasks()
+
+
                     val tasks = listOf(
                         Task(1,"Hacer la tarea", "no se que poner", "10/11/22", false),
 
@@ -59,7 +62,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navigation, startDestination = Routes.InitialScreen.route){
                         composable(Routes.InitialScreen.route){ InitialScreen(modifier = Modifier.padding(innerPadding),
-                            tasks = tasks,
+                            tasks = taskTest,
                             navController = navigation, initialScreenViewModel = initialScreenViewModel) }
 
                         composable(Routes.CompletedTasksScreen.route){
