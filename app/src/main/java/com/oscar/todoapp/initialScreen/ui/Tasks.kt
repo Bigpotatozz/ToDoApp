@@ -38,7 +38,7 @@ fun TaskComponent(task: Task, onCheckedChange: (Boolean) -> Unit){
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
         Column {
             Text(task.descripcion, fontFamily = FontFamily.SansSerif, fontSize = 20.sp)
-            Text(task.fecha.toString(), fontSize = 15.sp)
+            Text(task.fecha, fontSize = 15.sp)
         }
 
             Checkbox(checked = estadoTarea, onCheckedChange = {
