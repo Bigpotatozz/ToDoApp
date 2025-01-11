@@ -1,8 +1,11 @@
 package com.oscar.todoapp.initialScreen.data.network
 
 import com.oscar.todoapp.initialScreen.data.models.Task
+import com.oscar.todoapp.initialScreen.data.network.request.CompleteTareaRequest
 import com.oscar.todoapp.initialScreen.data.network.response.InitialScreenResponse
+import com.oscar.todoapp.initialScreen.data.network.response.SuccessResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -17,7 +20,7 @@ interface InitialScreenClient {
     suspend fun getTasks(): Response<List<Task>>
 
     @PATCH("tarea/complete/")
-    suspend fun completeTask(@Query("id") idTask: Int): Response<String>
+    suspend fun completeTask(@Query("id") idTask: Int, @Body task: CompleteTareaRequest): Response<SuccessResponse>
 
 
 }

@@ -34,6 +34,7 @@ class InitialScreenViewModel @Inject constructor(private val initialScreenUseCas
 
             when(tareas){
                 is InitialScreenResponse.error -> emptyList<Task>()
+                is InitialScreenResponse.successResponse -> emptyList<Task>()
                 is InitialScreenResponse.getTasksSuccess -> _tasks.value = tareas.tasks
             }
 
