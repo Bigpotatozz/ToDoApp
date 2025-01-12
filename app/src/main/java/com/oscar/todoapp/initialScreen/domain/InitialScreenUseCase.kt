@@ -12,9 +12,6 @@ class InitialScreenUseCase @Inject constructor(private val initialScreenReposito
         return initialScreenRepository.getTasks();
     }
 
-    suspend fun invokeCompletedTasks(): InitialScreenResponse{
-        return initialScreenRepository.getCompletedTasks();
-    }
 
     suspend fun invokeCompleteTask(id_tarea: Int, estado: Boolean): InitialScreenResponse{
 

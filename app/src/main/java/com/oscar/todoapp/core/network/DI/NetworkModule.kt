@@ -1,5 +1,6 @@
 package com.oscar.todoapp.core.network.DI
 
+import com.oscar.todoapp.completedTasksScreen.data.network.CompletedTasksClient
 import com.oscar.todoapp.initialScreen.data.network.InitialScreenClient
 import dagger.Module
 import dagger.Provides
@@ -22,10 +23,16 @@ class NetworkModule {
             .build()
     }
 
-@Singleton
-@Provides
-fun provideInitialScreenClient(retrofit: Retrofit):InitialScreenClient{
-    return retrofit.create(InitialScreenClient::class.java);
-}
+    @Singleton
+    @Provides
+    fun provideInitialScreenClient(retrofit: Retrofit): InitialScreenClient {
+        return retrofit.create(InitialScreenClient::class.java);
+    }
+
+    @Singleton
+    @Provides
+    fun provideCompletedTaskClient(retrofit: Retrofit): CompletedTasksClient {
+        return retrofit.create(CompletedTasksClient::class.java)
+    }
 
 }

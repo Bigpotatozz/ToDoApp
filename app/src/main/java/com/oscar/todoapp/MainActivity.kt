@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.oscar.todoapp.completedTasksScreen.CompletedTasksViewModel
 import com.oscar.todoapp.completedTasksScreen.ui.CompletedTasksScreen
 import com.oscar.todoapp.initialScreen.InitialScreenViewModel
 import com.oscar.todoapp.initialScreen.data.models.Task
@@ -41,6 +42,7 @@ import java.time.LocalDate
 class MainActivity : ComponentActivity() {
 
     private val initialScreenViewModel: InitialScreenViewModel by viewModels();
+    private val completedTasksViewModel: CompletedTasksViewModel by viewModels();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +67,7 @@ class MainActivity : ComponentActivity() {
                             navController = navigation, initialScreenViewModel = initialScreenViewModel) }
 
                         composable(Routes.CompletedTasksScreen.route){
-                            CompletedTasksScreen(modifier = Modifier.padding(innerPadding), tasks)
+                            CompletedTasksScreen(modifier = Modifier.padding(innerPadding), completedTasksViewModel )
                         }
                     }
 

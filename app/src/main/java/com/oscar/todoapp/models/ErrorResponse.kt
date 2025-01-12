@@ -1,4 +1,4 @@
-package com.oscar.todoapp.initialScreen.data.network.response
+package com.oscar.todoapp.models
 
 class ErrorResponse(var message: String, statusCode: Int) {
 }

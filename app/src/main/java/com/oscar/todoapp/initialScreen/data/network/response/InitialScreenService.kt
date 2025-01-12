@@ -1,8 +1,8 @@
 package com.oscar.todoapp.initialScreen.data.network.response
 
-import com.oscar.todoapp.initialScreen.data.models.Task
 import com.oscar.todoapp.initialScreen.data.network.InitialScreenClient
 import com.oscar.todoapp.initialScreen.data.network.request.CompleteTareaRequest
+import com.oscar.todoapp.models.ErrorResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -37,25 +37,7 @@ class InitialScreenService @Inject constructor(private val initialScreenClient: 
         }
     }
 
-    suspend fun getCompletedTasks(): InitialScreenResponse{
-        try{
 
-            var response = withContext(Dispatchers.IO){
-                initialScreenClient.getCompletedTasks()
-            }
-
-            if(response.isSuccessful){
-                return InitialScreenResponse.getTasksSuccess(response.body() ?: emptyList());
-            }else{
-                return InitialScreenResponse.error(ErrorResponse(response.message(), response.code()));
-            }
-
-
-        }catch (e: HttpException){
-            println(e.message())
-            return InitialScreenResponse.error(ErrorResponse(e.message(), e.code()))
-        }
-    }
 
     suspend fun completeTask(id_tarea: Int, estado: CompleteTareaRequest): InitialScreenResponse {
 

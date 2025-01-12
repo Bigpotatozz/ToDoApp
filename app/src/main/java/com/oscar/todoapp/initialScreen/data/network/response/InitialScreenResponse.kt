@@ -1,6 +1,8 @@
 package com.oscar.todoapp.initialScreen.data.network.response
 
 import com.oscar.todoapp.initialScreen.data.models.Task
+import com.oscar.todoapp.models.ErrorResponse
+import com.oscar.todoapp.models.SuccessResponse
 
 sealed class InitialScreenResponse {
 
