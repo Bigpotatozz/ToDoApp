@@ -40,4 +40,12 @@ class InitialScreenViewModel @Inject constructor(private val initialScreenUseCas
 
         }
     }
+
+    fun completeTask(id_tarea: Int, estatus: Boolean){
+        viewModelScope.launch {
+            var completedTask = initialScreenUseCase.invokeCompleteTask(id_tarea, estatus);
+            println(completedTask);
+        }
+
+    }
 }

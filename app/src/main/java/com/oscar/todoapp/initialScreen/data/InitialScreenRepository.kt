@@ -12,6 +12,10 @@ class InitialScreenRepository @Inject constructor(private val initialScreenServi
         return initialScreenService.getTasks();
     }
 
+    suspend fun getCompletedTasks(): InitialScreenResponse{
+        return initialScreenService.getCompletedTasks();
+    }
+
     suspend fun completeTask(id_tarea: Int, estatus: CompleteTareaRequest): InitialScreenResponse {
         return initialScreenService.completeTask(id_tarea, estatus);
     }

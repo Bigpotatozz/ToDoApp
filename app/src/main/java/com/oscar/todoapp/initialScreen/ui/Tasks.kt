@@ -26,11 +26,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.oscar.todoapp.initialScreen.InitialScreenViewModel
 import com.oscar.todoapp.initialScreen.data.models.Task
 
 
 @Composable
-fun TaskComponent(task: Task, onCheckedChange: (Boolean) -> Unit){
+fun TaskComponent(task: Task, initialScreenViewModel: InitialScreenViewModel){
 
     var estadoTarea by rememberSaveable { mutableStateOf(task.estado)}
 
@@ -43,7 +44,9 @@ fun TaskComponent(task: Task, onCheckedChange: (Boolean) -> Unit){
 
             Checkbox(checked = estadoTarea, onCheckedChange = {
                 estadoTarea = !estadoTarea
-                onCheckedChange(it)})
+
+                initialScreenViewModel.completeTask(task.id_task, estadoTarea);
+            })
 
     }
 }

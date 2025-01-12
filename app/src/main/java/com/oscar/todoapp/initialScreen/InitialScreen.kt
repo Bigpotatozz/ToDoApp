@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -30,21 +31,18 @@ import java.util.Date
 @Composable
 fun InitialScreen(modifier: Modifier,  navController: NavController, initialScreenViewModel: InitialScreenViewModel){
 
+    LaunchedEffect(Unit) {
+        initialScreenViewModel.getTasks();
+    }
     val tasksApi: List<Task> by initialScreenViewModel.tasks.observeAsState(emptyList())
 
     Column {
         LazyColumn(modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             items(tasksApi){
                 task ->
-                TaskComponent(task) {
-                    task.estado = it
-                    println(task)
-                }
+                TaskComponent(task, initialScreenViewModel)
             }
         }
-        Button(onClick = {
-            initialScreenViewModel.getTasks();
-        }) { }
     }
 
 
