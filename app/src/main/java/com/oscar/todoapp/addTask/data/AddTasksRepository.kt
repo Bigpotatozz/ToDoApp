@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AddTasksRepository @Inject constructor(private val addTaskService: AddTaskService){
 
-    suspend fun addTask(task: AddTaskRequest): AddTaskResponse{
+    suspend fun InvokeaddTask(task: AddTaskRequest): AddTaskResponse{
 
         return addTaskService.addTask(task);
 
