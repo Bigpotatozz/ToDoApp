@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.oscar.todoapp.addTask.AddTaskViewModel
 import com.oscar.todoapp.completedTasksScreen.CompletedTasksViewModel
 import com.oscar.todoapp.completedTasksScreen.ui.CompletedTasksScreen
 import com.oscar.todoapp.initialScreen.InitialScreenViewModel
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
 
     private val initialScreenViewModel: InitialScreenViewModel by viewModels();
     private val completedTasksViewModel: CompletedTasksViewModel by viewModels();
+    private val addTaskViewModel: AddTaskViewModel by viewModels();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 val navigation = rememberNavController();
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     bottomBar = { BottomNavigationBar(navController = navigation) },
-                    floatingActionButton = { DialogAgregarTarea() }) { innerPadding ->
+                    floatingActionButton = { DialogAgregarTarea(addTaskViewModel) }) { innerPadding ->
 
 
                     val tasks = listOf(

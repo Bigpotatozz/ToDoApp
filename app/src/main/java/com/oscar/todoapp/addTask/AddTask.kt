@@ -14,6 +14,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,9 +28,13 @@ import androidx.compose.ui.window.DialogProperties
 
 
 @Composable
-fun DialogAgregarTarea(nombre:String, descripcion: String, onClick: () -> Unit){
+fun DialogAgregarTarea(addTaskViewModel: AddTaskViewModel){
 
     var dialogVisible by remember { mutableStateOf(false) }
+
+    val nombre: String by addTaskViewModel.nombre.observeAsState("");
+    val descripcion: String by addTaskViewModel.descripcion.observeAsState("");
+
 
     FloatingActionButton(onClick = {
         dialogVisible = true;
@@ -43,8 +48,11 @@ fun DialogAgregarTarea(nombre:String, descripcion: String, onClick: () -> Unit){
     if(dialogVisible){
         Dialog(onDismissRequest = {dialogVisible = false },
             properties = DialogProperties(dismissOnClickOutside = true, dismissOnBackPress = true)) {
-            FormularioAgregarTarea(nombre, descripcion) {
-                onClick()
+
+
+            FormularioAgregarTarea(addTaskViewModel) {
+                addTaskViewModel.addTask(nombre, descripcion);
+
             }
         }
     }
@@ -53,18 +61,18 @@ fun DialogAgregarTarea(nombre:String, descripcion: String, onClick: () -> Unit){
 
 
 @Composable
-fun FormularioAgregarTarea(nombre: String, descripcion: String, onClick:()-> Unit){
+fun FormularioAgregarTarea(addTaskViewModel: AddTaskViewModel, onClick:()-> Unit){
 
     Box(Modifier.clip(RoundedCornerShape(15.dp)).background(Color.White).padding(15.dp)){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally) {
             OutlinedTextField(modifier = Modifier.padding(top = 15.dp),
-                value = nombre,
-                onValueChange = {},
+                value = addTaskViewModel.nombre.value!!,
+                onValueChange = {addTaskViewModel.changeNombre(it)},
                 label = { Text("Nombre") } )
             OutlinedTextField(modifier = Modifier.padding(top = 15.dp),
-                value = descripcion,
-                onValueChange = {},
+                value = addTaskViewModel.descripcion.value!!,
+                onValueChange = {addTaskViewModel.changeDescripcion(it)},
                 label = { Text("Descripcion") } )
             Button(modifier = Modifier.padding(top = 15.dp),
                 onClick = { onClick() }) {
